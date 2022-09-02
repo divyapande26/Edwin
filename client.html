@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Parcel Sandbox</title>
+	<meta charset="UTF-8" />
+</head>
+
+<body>
+	<div id="app"></div>
+	<h1>Hello</h1>
+	<div id="user-list"></div>
+	<button style="background-color: #008cba;" onclick="myFunction()">
+		Age above 18
+	</button>
+</body>
+<script>
+	async function main() {
+		try {
+			const response = await fetch("http://localhost:8000/getusers");
+			const userData = await response.json();
+			const userList = document.getElementById("user-list");
+			userData.forEach((element) => {
+				const user = document.createElement("div");
+				user.innerText = element.name + ' ' + element.age;
+				userList.appendChild(user);
+			});
+		} catch (error) {
+			console.log("error", error);
+			const userList = document.getElementById("user-list");
+			userList.innerText = "Server is down api not available";
+		} finally {
+				console.log('finally')
+		}
+	}
+
+	main();
+	console.log("hello");
+</script>
+</html>
+
+
+	<script src="src/index.js">
+	</script>
+</body>
+
+</html>
